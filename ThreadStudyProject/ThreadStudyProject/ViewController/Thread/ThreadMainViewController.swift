@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThreadMainViewController: BaseViewController {
+class ThreadMainViewController: UIViewController {
 
     // MARK: - Life Cycle
     override func viewDidLoad() {
