@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E910210E25E3F94F00BB083A /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E910210D25E3F94F00BB083A /* String+Extension.swift */; };
 		E9FF587D25DC181700CBE5EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF587C25DC181700CBE5EE /* AppDelegate.swift */; };
 		E9FF587F25DC181700CBE5EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF587E25DC181700CBE5EE /* SceneDelegate.swift */; };
 		E9FF588125DC181700CBE5EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF588025DC181700CBE5EE /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E910210D25E3F94F00BB083A /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		E9FF587925DC181700CBE5EE /* VisionStudyProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionStudyProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9FF587C25DC181700CBE5EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9FF587E25DC181700CBE5EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E910210B25E3F93000BB083A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E9FF588225DC181700CBE5EE /* Main.storyboard */,
+				E9FF588025DC181700CBE5EE /* ViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		E910210C25E3F94000BB083A /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E910210D25E3F94F00BB083A /* String+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		E9FF587025DC181700CBE5EE = {
 			isa = PBXGroup;
 			children = (
@@ -58,10 +77,10 @@
 		E9FF587B25DC181700CBE5EE /* VisionStudyProject */ = {
 			isa = PBXGroup;
 			children = (
+				E910210B25E3F93000BB083A /* ViewController */,
+				E910210C25E3F94000BB083A /* Extension */,
 				E9FF587C25DC181700CBE5EE /* AppDelegate.swift */,
 				E9FF587E25DC181700CBE5EE /* SceneDelegate.swift */,
-				E9FF588025DC181700CBE5EE /* ViewController.swift */,
-				E9FF588225DC181700CBE5EE /* Main.storyboard */,
 				E9FF588825DC181800CBE5EE /* Assets.xcassets */,
 				E9FF588A25DC181800CBE5EE /* LaunchScreen.storyboard */,
 				E9FF588D25DC181800CBE5EE /* Info.plist */,
@@ -143,6 +162,7 @@
 				E9FF588125DC181700CBE5EE /* ViewController.swift in Sources */,
 				E9FF587D25DC181700CBE5EE /* AppDelegate.swift in Sources */,
 				E9FF587F25DC181700CBE5EE /* SceneDelegate.swift in Sources */,
+				E910210E25E3F94F00BB083A /* String+Extension.swift in Sources */,
 				E9FF588725DC181700CBE5EE /* VisionStudyProject.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
