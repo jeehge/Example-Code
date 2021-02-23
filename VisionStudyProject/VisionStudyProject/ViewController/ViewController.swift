@@ -9,13 +9,13 @@ import UIKit
 import Vision
 import VisionKit
 
-class ViewController: UIViewController {
-	
+final class ViewController: UIViewController {
+	// MARK: - Properties
 	@IBOutlet private weak var imageView: UIImageView!
 	@IBOutlet private weak var textView: UITextView!
 	
-	private var textRecognitionRequest = VNRecognizeTextRequest(completionHandler: nil)
-	private let textRecognitionWorkQueue = DispatchQueue(label: "MyVisionScannerQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+	private var textRequest = VNRecognizeTextRequest(completionHandler: nil)
+	private let scannerQueue = DispatchQueue(label: "MyVisionScannerQueue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
 	
 	// MARK: - Life Cycle
 	override func viewDidLoad() {
@@ -27,33 +27,27 @@ class ViewController: UIViewController {
 	
 	private func setupVision() {
 		// 이미지에서 텍스트를 찾고 인식하는 이미지 분석 요청
-		textRecognitionRequest = VNRecognizeTextRequest { (request, error) in
+		textRequest = VNRecognizeTextRequest { (request, error) in
 			guard let observations = request.results as? [VNRecognizedTextObservation] else { return }
 
 			var detectedText = ""
 			for observation in observations {
 				guard let topCandidate = observation.topCandidates(1).first else { return }
-				print("text \(topCandidate.string) has confidence \(topCandidate.confidence)")
-
-				detectedText += topCandidate.string
-				detectedText += "\n"
+				// 카드 번호 정규식
+				let creditCardPattern = #"\d{4} \d{4} \d{4} \d{4}"#
+				// 카드 날짜 정규식
+				let datePattern = #"\d{2}/\d{2}"#
 				
+				let text = topCandidate.string
+				let creditCardNumber = text.getArrayAfterRegex(regex: creditCardPattern)
+				let creditCardDate = text.getArrayAfterRegex(regex: datePattern)
 				
-//				let pattern = #"""
-//						\d{4} \d{4} \d{4} \d{4}
-//						"""#
-//				
-//				do {
-//					let regex = try NSRegularExpression(pattern: pattern)
-//					let results = regex.matches(in: topCandidate.string,
-//												range: Range( )
-//					let a = results.map {
-//						String(self[Range($0.range, in: self)!])
-//					}
-//					print(a)
-//				} catch let error {
-//					print("invalid regex: \(error.localizedDescription)")
-//				}
+				if let cardNumber = creditCardNumber.first,
+				   let cardDate = creditCardDate.first {
+					detectedText += cardNumber
+					detectedText += "\n"
+					detectedText += cardDate
+				}
 			}
 			DispatchQueue.main.async { [weak self] in
 				guard let self = self else { return }
@@ -62,9 +56,7 @@ class ViewController: UIViewController {
 			}
 		}
 
-		textRecognitionRequest.recognitionLevel = .accurate
-		
-		
+		textRequest.recognitionLevel = .accurate
 	}
 	
 	private func processImage(_ image: UIImage) {
@@ -76,10 +68,10 @@ class ViewController: UIViewController {
 		guard let cgImage = image.cgImage else { return }
 		
 		textView.text = ""
-		textRecognitionWorkQueue.async {
+		scannerQueue.async {
 			let requestHandler = VNImageRequestHandler(cgImage: cgImage, options: [:])
 			do {
-				try requestHandler.perform([self.textRecognitionRequest])
+				try requestHandler.perform([self.textRequest])
 			} catch {
 				print(error)
 			}
